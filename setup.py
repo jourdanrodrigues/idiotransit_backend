@@ -1,4 +1,4 @@
-# from codecs import open
+from codecs import open
 from os import path
 
 from setuptools import setup, find_packages
@@ -6,9 +6,8 @@ from setuptools import setup, find_packages
 project_path = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file (no README yet)
-# with open(path.join(project_path, 'README.md'), encoding='utf-8') as f:
-#     long_description = f.read()
-long_description = ''
+with open(path.join(project_path, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='IdioTransit',
