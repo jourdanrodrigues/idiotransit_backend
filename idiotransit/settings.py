@@ -1,6 +1,7 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'v4x&su+w@hnq)t=o_#o=gea(oli=fr(95g6q$x4ds$1jiojsa)'
@@ -77,5 +78,9 @@ USE_L10N = True
 USE_TZ = False
 
 AUTH_USER_MODEL = 'core.User'
+
+LOCALE_PATHS = [
+    os.path.join(PROJECT_DIR, 'core', 'locale')
+]
 
 STATIC_URL = '/static/'
