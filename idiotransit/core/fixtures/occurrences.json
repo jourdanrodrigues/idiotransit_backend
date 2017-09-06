@@ -1,0 +1,12 @@
+[
+    {
+    "model": "core.occurrence",
+    "pk": "12445478-1234-1234-1234-123456789012",
+    "fields": {
+      "user": null,
+      "vehicle": "12345678-1234-1234-1234-123456789012",
+      "description": "A descriptive message about what happened.",
+      "date_time": "2017-09-05T22:36:25.125"
+    }
+  }
+]

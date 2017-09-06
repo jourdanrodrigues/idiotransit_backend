@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models, transaction
 from django.db.models import SET_NULL
@@ -30,10 +31,10 @@ class User(AbstractBaseUser):
         return super(User, self).delete(**kwargs)
 
     def get_full_name(self):  # "Interface" method
-        return self.name
+        raise NotImplementedError(settings.MESSAGES['NOT_IMPLEMENTED'])
 
     def get_short_name(self):  # "Interface" method
-        return self.name
+        raise NotImplementedError(settings.MESSAGES['NOT_IMPLEMENTED'])
 
 
 class Vehicle(models.Model):
@@ -44,6 +45,9 @@ class Vehicle(models.Model):
     model = models.CharField(_('Model'), max_length=40, null=True)
     brand = models.CharField(_('Brand'), max_length=40, null=True)
 
+    def delete(self, *args, **kwargs):
+        raise NotImplementedError(settings.MESSAGES['NOT_IMPLEMENTED'])
+
 
 class Occurrence(models.Model):
     id = IdField
@@ -51,3 +55,6 @@ class Occurrence(models.Model):
     vehicle = models.ForeignKey(Vehicle, related_name='occurrences')
     description = models.CharField(max_length=tweet_length)
     date_time = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def delete(self, *args, **kwargs):
+        raise NotImplementedError(settings.MESSAGES['NOT_IMPLEMENTED'])

@@ -71,6 +71,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+MESSAGES = {
+    'NOT_IMPLEMENTED': 'You just can\'t use this method.'
+}
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -81,6 +85,10 @@ AUTH_USER_MODEL = 'core.User'
 
 LOCALE_PATHS = [
     os.path.join(PROJECT_DIR, 'core', 'locale')
+]
+
+FIXTURE_PATHS = [
+    os.path.join(PROJECT_DIR, 'core', 'fixtures')
 ]
 
 STATIC_URL = '/static/'
