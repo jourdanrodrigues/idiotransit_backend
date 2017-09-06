@@ -84,11 +84,11 @@ USE_TZ = False
 AUTH_USER_MODEL = 'core.User'
 
 LOCALE_PATHS = [
-    os.path.join(PROJECT_DIR, 'core', 'locale')
+    os.path.join(PROJECT_DIR, 'locale')
 ]
 
 FIXTURE_PATHS = [
-    os.path.join(PROJECT_DIR, 'core', 'fixtures')
+    os.path.join(PROJECT_DIR, 'fixtures')
 ]
 
 STATIC_URL = '/static/'
