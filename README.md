@@ -2,20 +2,23 @@
 
 Share the idiocy of drivers.
 
-### Business Rules
+## Useful information
 
-- A vehicle *can* have a owner;
+- [Business Rules](docs/BusinessRules.md)
+- [Entity-Relation Diagram (ERD)](https://www.draw.io/#G0B4yTyCMc2tdNWGhsYnpZTWtJeW8)
 
-- If the vehicle owner deletes its register, its vehicles must be preserved;
+## Contributing
 
-- The vehicle occurrence *can* have a user;
+Any contribution is very welcome. Fill a issue and lets start discussing about it.
 
-- A reply existence is bound to the vehicle owner existence;
+## Development
 
-- If the user deletes its register, its occurrences must be preserved;
+We use and recommend [JetBrains' PyCharm](https://www.jetbrains.com/pycharm/download/).
 
-- **MUST NOT** be possible to list vehicles data (security matter).
+Cloning this repo and running the following commands at the root will give you a working development environment:
 
-### Entity-Relation Diagram (ERD) link
+- `./create_env.sh`
+- `source ./env/bin/activate`
+- `pip install -e .`
 
-https://www.draw.io/#LIdioTransit
+Don't miss the "e" option, which stands for "editable" ([more about it](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs)).
