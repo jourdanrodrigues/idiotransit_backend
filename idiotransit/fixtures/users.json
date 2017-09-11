@@ -14,5 +14,13 @@
       "name": "Krisbew Webs",
       "email": "krisbew.webs@email.test"
     }
+  },
+  {
+    "model": "core.user",
+    "pk": "12C6824F-F8A1-4964-BEB3-79CD6B120B0E",
+    "fields": {
+      "name": "Newman Crawler",
+      "email": "newman.crawler@email.test"
+    }
   }
 ]

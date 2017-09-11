@@ -5,7 +5,7 @@ from idiotransit.core.models import Vehicle, Occurrence, User
 
 
 class VehicleTestCase(TestCase):
-    fixtures = ['vehicles']
+    fixtures = ['vehicles', 'users']
 
     def test_delete_vehicle(self):
         vehicle = Vehicle.objects.first()
@@ -47,6 +47,13 @@ class UserTestCase(TestCase):
         user.delete()
 
         self.assertTrue(Occurrence.objects.filter(user__isnull=True, id__in=occurrences_ids).exists())
+
+    def test_set_vehicles_to_null_on_delete(self):
+        user = User.objects.filter(vehicles__isnull=False).first()
+        vehicles_ids = list(user.vehicles.values_list('id', flat=True))  # "list" to force query execution
+        user.delete()
+
+        self.assertTrue(Vehicle.objects.filter(owner__isnull=True, id__in=vehicles_ids).exists())
 
     def test_user_methods(self):
         user = User.objects.first()

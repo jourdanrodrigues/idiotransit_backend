@@ -9,5 +9,16 @@
       "model": "Uno",
       "brand": "Fiat"
     }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": "CEDEF81D-4E1F-4FFC-A6F0-03A5C20FF79E",
+    "fields": {
+      "owner": "12C6824F-F8A1-4964-BEB3-79CD6B120B0E",
+      "license_plate": "HFY-4328",
+      "color": "Brown",
+      "model": "Fire",
+      "brand": "Palio"
+    }
   }
 ]
