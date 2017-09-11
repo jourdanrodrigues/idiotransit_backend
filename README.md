@@ -22,3 +22,13 @@ Cloning this repo and running the following commands at the root will give you a
 - `pip install -e .`
 
 Don't miss the "e" option, which stands for "editable" ([more about it](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs)).
+
+The variable "DATABASE_URL" is required to be set in the environment, referencing a PostgreSQL database.
+
+You can do this by manually defining it (`exports` etc.) or creating a `.env` file based on `.env.example`, in the
+project's root.
+
+## Deployment
+
+The _Continuous Integration_ triggers the _Continuous Deployment_. This means, if all tests passes and the changes are
+all good, the updates are applied to the production server.
