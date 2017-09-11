@@ -28,11 +28,14 @@ class VehicleTestCase(TestCase):
 class OccurrenceTestCase(TestCase):
     fixtures = ['vehicles', 'occurrences']
 
-    def test_delete_occurrence(self):
-        occurrence = Occurrence.objects.first()
+    def test_occurrence_creation(self):
+        data = {'vehicle': Vehicle.objects.first(), 'description': 'A nice and sweet message about what happened'}
+        Occurrence.objects.create(**data)
+        self.assertTrue(Occurrence.objects.filter(user__isnull=True, **data).exists())
 
+    def test_delete_occurrence(self):
         with self.assertRaises(NotImplementedError):
-            occurrence.delete()
+            Occurrence.objects.first().delete()
 
 
 class UserTestCase(TestCase):
