@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: Jourdan Rodrigues\n"
-"POT-Creation-Date: 2017-09-05 00:05+0000\n"
+"POT-Creation-Date: 2017-09-11 00:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jourdan Rodrigues <thiagojourdan@gmail.com>\n"
 "Language: Portuguese\n"
@@ -11,22 +11,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: idiotransit/core/models.py:22
+#: idiotransit/core/apps.py:6
+msgid "Core"
+msgstr "Núcleo"
+
+#: idiotransit/core/models.py:23
 msgid "Name"
 msgstr "Nome"
 
-#: idiotransit/core/models.py:42
+#: idiotransit/core/models.py:43
 msgid "License Plate"
 msgstr "Placa"
 
-#: idiotransit/core/models.py:43
+#: idiotransit/core/models.py:44
 msgid "Color"
 msgstr "Cor"
 
-#: idiotransit/core/models.py:44
+#: idiotransit/core/models.py:45
 msgid "Model"
 msgstr "Modelo"
 
-#: idiotransit/core/models.py:45
+#: idiotransit/core/models.py:46
 msgid "Brand"
 msgstr "Marca"
