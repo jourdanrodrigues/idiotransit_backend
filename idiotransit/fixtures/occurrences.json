@@ -8,5 +8,15 @@
       "description": "A descriptive message about what happened.",
       "date_time": "2017-09-05T22:36:25.125"
     }
+  },
+  {
+    "model": "core.occurrence",
+    "pk": "0BE913B5-9044-4DB0-98D6-E909F52E0E83",
+    "fields": {
+      "user": "F551A5D6-F148-4E36-B63A-E46FEE127054",
+      "vehicle": "12345678-1234-1234-1234-123456789012",
+      "description": "A descriptive message about what happened.",
+      "date_time": "2017-09-05T22:36:25.125"
+    }
   }
 ]

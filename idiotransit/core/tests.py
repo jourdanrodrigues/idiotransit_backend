@@ -26,7 +26,7 @@ class VehicleTestCase(TestCase):
 
 
 class OccurrenceTestCase(TestCase):
-    fixtures = ['vehicles', 'occurrences']
+    fixtures = ['vehicles', 'occurrences', 'users']
 
     def test_occurrence_creation(self):
         data = {'vehicle': Vehicle.objects.first(), 'description': 'A nice and sweet message about what happened'}
@@ -39,7 +39,14 @@ class OccurrenceTestCase(TestCase):
 
 
 class UserTestCase(TestCase):
-    fixtures = ['users']
+    fixtures = ['users', 'vehicles', 'occurrences']
+
+    def test_set_occurrences_to_null_on_delete(self):
+        user = User.objects.filter(occurrences__isnull=False).first()
+        occurrences_ids = list(user.occurrences.values_list('id', flat=True))  # "list" to force query execution
+        user.delete()
+
+        self.assertTrue(Occurrence.objects.filter(user__isnull=True, id__in=occurrences_ids).exists())
 
     def test_user_methods(self):
         user = User.objects.first()

@@ -6,5 +6,13 @@
       "name": "Joswell Kron",
       "email": "joswell.kron@email.test"
     }
+  },
+  {
+    "model": "core.user",
+    "pk": "F551A5D6-F148-4E36-B63A-E46FEE127054",
+    "fields": {
+      "name": "Krisbew Webs",
+      "email": "krisbew.webs@email.test"
+    }
   }
 ]
