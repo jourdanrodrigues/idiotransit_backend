@@ -27,7 +27,7 @@ class User(AbstractBaseUser):
 
     @transaction.atomic
     def delete(self, **kwargs):
-        Reply.objects.filter(occurrence__vehicle__owner=self).distinct().delete()
+        Reply.objects.filter(occurrence__vehicle__owner=self).delete()
         return super(User, self).delete(**kwargs)
 
     def get_full_name(self):  # "Interface" method

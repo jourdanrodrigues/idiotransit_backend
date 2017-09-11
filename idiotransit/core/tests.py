@@ -1,7 +1,7 @@
 from django.db import IntegrityError
 from django.test import TestCase
 
-from idiotransit.core.models import Vehicle, Occurrence, User
+from idiotransit.core.models import Vehicle, Occurrence, User, Reply
 
 
 class VehicleTestCase(TestCase):
@@ -39,7 +39,7 @@ class OccurrenceTestCase(TestCase):
 
 
 class UserTestCase(TestCase):
-    fixtures = ['users', 'vehicles', 'occurrences']
+    fixtures = ['users', 'vehicles', 'occurrences', 'replies']
 
     def test_set_occurrences_to_null_on_delete(self):
         user = User.objects.filter(occurrences__isnull=False).first()
@@ -54,6 +54,13 @@ class UserTestCase(TestCase):
         user.delete()
 
         self.assertTrue(Vehicle.objects.filter(owner__isnull=True, id__in=vehicles_ids).exists())
+
+    def test_delete_replies_on_delete(self):
+        user = User.objects.filter(vehicles__occurrences__replies__isnull=False).first()
+        replies_ids = list(Reply.objects.filter(occurrence__vehicle__owner=user).values_list('id', flat=True))
+        user.delete()
+
+        self.assertFalse(Reply.objects.filter(id__in=replies_ids).exists())
 
     def test_user_methods(self):
         user = User.objects.first()

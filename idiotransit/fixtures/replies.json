@@ -1,0 +1,10 @@
+[
+  {
+    "model": "core.reply",
+    "pk": "0A1D3D80-3192-4218-A25E-97C8862F4019",
+    "fields": {
+      "occurrence": "0BE913B5-9044-4DB0-98D6-E909F52E0E83",
+      "message": "A very good reply message."
+    }
+  }
+]
