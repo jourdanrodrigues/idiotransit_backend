@@ -28,6 +28,7 @@ setup(
     keywords='rating transit driving quality',
     packages=find_packages(),
     install_requires=[
+        'dj-database-url==0.4.2',
         'Django==1.11.4',
     ],
     extras_require={

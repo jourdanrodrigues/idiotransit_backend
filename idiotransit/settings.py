@@ -1,12 +1,18 @@
 import os
+from dj_database_url import config as db_config
+
+from assets.utils import read_dot_env
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+read_dot_env(os.path.join(BASE_DIR, '.env'))
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'v4x&su+w@hnq)t=o_#o=gea(oli=fr(95g6q$x4ds$1jiojsa)'
 
-DEBUG = True
+PRODUCTION = bool(int(os.getenv('PRODUCTION', 0)))
+DEBUG = bool(int(os.getenv('DEBUG', 0 if PRODUCTION else 1)))
 
 ALLOWED_HOSTS = []
 
@@ -58,10 +64,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'idiotransit.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': db_config()
 }
 
 AUTH_PASSWORD_VALIDATORS = [
