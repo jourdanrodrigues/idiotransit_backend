@@ -40,7 +40,7 @@ class User(AbstractBaseUser):
 class Vehicle(models.Model):
     id = IdField
     owner = models.ForeignKey(User, null=True, on_delete=SET_NULL, related_name='vehicles')
-    license_plate = models.CharField(_('License Plate'), max_length=8)
+    license_plate = models.CharField(_('License Plate'), max_length=8, unique=True)
     color = models.CharField(_('Color'), max_length=20, null=True)
     model = models.CharField(_('Model'), max_length=40, null=True)
     brand = models.CharField(_('Brand'), max_length=40, null=True)

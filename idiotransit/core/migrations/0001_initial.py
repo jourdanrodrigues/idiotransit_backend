@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
             name='Vehicle',
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('license_plate', models.CharField(max_length=8, verbose_name='License Plate')),
+                ('license_plate', models.CharField(max_length=8, verbose_name='License Plate', unique=True)),
                 ('color', models.CharField(max_length=20, null=True, verbose_name='Color')),
                 ('model', models.CharField(max_length=40, null=True, verbose_name='Model')),
                 ('brand', models.CharField(max_length=40, null=True, verbose_name='Brand')),
