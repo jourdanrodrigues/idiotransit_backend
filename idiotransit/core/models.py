@@ -2,8 +2,11 @@ from uuid import uuid4
 
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
+from django.core.exceptions import ValidationError
 from django.db import models, transaction
 from django.db.models import SET_NULL
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 
 IdField = models.UUIDField(primary_key=True, default=uuid4, editable=False)
@@ -49,6 +52,39 @@ class Vehicle(models.Model):
         raise NotImplementedError(settings.MESSAGES['NOT_IMPLEMENTED'])
 
 
+class VehicleOwnershipRequest(models.Model):
+    PENDING_STATUS = 1
+    ACCEPTED_STATUS = 2
+    DENIED_STATUS = 3
+    STATUSES = [
+        [PENDING_STATUS, _('Pending')],
+        [ACCEPTED_STATUS, _('Accepted')],
+        [DENIED_STATUS, _('Denied')],
+    ]
+
+    id = IdField
+    user = models.ForeignKey(User, related_name='vehicle_requests')
+    vehicle = models.ForeignKey(Vehicle, related_name='ownership_requests')
+    status = models.IntegerField(choices=STATUSES, default=PENDING_STATUS)
+
+    @transaction.atomic
+    def accept(self):
+        # Update other ownership requests to status denied
+        (self.__class__.objects
+         .filter(status=self.PENDING_STATUS, vehicle=self.vehicle)
+         .exclude(id=self.id)
+         .update(status=self.DENIED_STATUS))
+
+        self.status = self.ACCEPTED_STATUS
+        self.save()
+
+        self.vehicle.owner = self.user
+        self.vehicle.save()
+
+    class Meta:
+        unique_together = ('user', 'vehicle')
+
+
 class Occurrence(models.Model):
     id = IdField
     user = models.ForeignKey(User, null=True, on_delete=SET_NULL, related_name='occurrences')
@@ -58,3 +94,10 @@ class Occurrence(models.Model):
 
     def delete(self, *args, **kwargs):
         raise NotImplementedError(settings.MESSAGES['NOT_IMPLEMENTED'])
+
+
+# noinspection PyUnusedLocal
+@receiver(pre_save, sender=VehicleOwnershipRequest)
+def pre_save_signal_for_vehicle_ownership_request(instance, **kwargs):
+    if instance.vehicle.owner is not None:
+        raise ValidationError(_('The vehicle requested already have an owner.'))

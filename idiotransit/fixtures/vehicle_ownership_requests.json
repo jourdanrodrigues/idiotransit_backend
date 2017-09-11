@@ -1,0 +1,18 @@
+[
+  {
+    "model": "core.vehicleownershiprequest",
+    "pk": "9D22A94E-0DD1-4BC2-B413-146A5F0C0587",
+    "fields": {
+      "user": "F551A5D6-F148-4E36-B63A-E46FEE127054",
+      "vehicle": "12345678-1234-1234-1234-123456789012"
+    }
+  },
+  {
+    "model": "core.vehicleownershiprequest",
+    "pk": "F878FA4C-797E-4EE0-BB29-45B1AB805723",
+    "fields": {
+      "user": "12345678-1234-1234-1274-1234A6789B12",
+      "vehicle": "12345678-1234-1234-1234-123456789012"
+    }
+  }
+]

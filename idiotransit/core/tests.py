@@ -1,7 +1,10 @@
+from django.core.exceptions import ValidationError
 from django.db import IntegrityError
+from django.db.models import Count
 from django.test import TestCase
+from django.utils.translation import ugettext as _
 
-from idiotransit.core.models import Vehicle, Occurrence, User, Reply
+from idiotransit.core.models import Vehicle, Occurrence, User, Reply, VehicleOwnershipRequest
 
 
 class VehicleTestCase(TestCase):
@@ -70,3 +73,33 @@ class UserTestCase(TestCase):
 
         with self.assertRaises(NotImplementedError):
             user.get_short_name()
+
+
+class VehicleOwnershipRequestTestCase(TestCase):
+    fixtures = ['users', 'vehicles', 'vehicle_ownership_requests']
+
+    def test_accept_request_with_more_than_one_for_a_vehicle(self):
+        vehicle = (Vehicle.objects.annotate(requests_count=Count('ownership_requests'))
+                   .filter(requests_count__gt=1, owner__isnull=True,
+                           ownership_requests__status=VehicleOwnershipRequest.PENDING_STATUS).first())
+        request = vehicle.ownership_requests.first()
+        request_count = vehicle.ownership_requests.count()
+
+        request.accept()
+
+        self.assertTrue(VehicleOwnershipRequest.objects
+                        .filter(id=request.id, status=VehicleOwnershipRequest.ACCEPTED_STATUS).exists())
+        self.assertTrue(Vehicle.objects.filter(id=request.vehicle.id, owner=request.user).exists())
+        self.assertTrue(
+            request_count - 1,
+            vehicle.ownership_requests.filter(status=VehicleOwnershipRequest.DENIED_STATUS).count()
+        )
+
+    def test_request_creation_with_owned_vehicle(self):
+        vehicle = Vehicle.objects.filter(owner__isnull=False).select_related('owner').first()
+        user = User.objects.exclude(id=vehicle.owner.id).first()
+
+        with self.assertRaises(ValidationError) as context_manager:
+            VehicleOwnershipRequest.objects.create(vehicle=vehicle, user=user)
+
+        self.assertEqual(context_manager.exception.message, _('The vehicle requested already have an owner.'))

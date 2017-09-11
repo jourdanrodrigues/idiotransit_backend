@@ -62,4 +62,20 @@ class Migration(migrations.Migration):
             name='vehicle',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='occurrences', to='core.Vehicle'),
         ),
+        migrations.CreateModel(
+            name='VehicleOwnershipRequest',
+            fields=[
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('status', models.IntegerField(choices=[[1, 'Pending'], [2, 'Accepted'], [3, 'Denied']], default=1)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='vehicle_requests',
+                                           to=settings.AUTH_USER_MODEL)),
+                ('vehicle',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ownership_requests',
+                                   to='core.Vehicle')),
+            ],
+        ),
+        migrations.AlterUniqueTogether(
+            name='vehicleownershiprequest',
+            unique_together=set([('user', 'vehicle')]),
+        ),
     ]
