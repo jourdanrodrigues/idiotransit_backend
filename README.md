@@ -2,6 +2,11 @@
 
 Share the idiocy of drivers.
 
+| Master | Development |
+| :----: | :---------: |
+| [![Build Status][travis_badge_master]][travis_link] | [![Build Status][travis_badge_development]][travis_link] |
+| [![codecov][codecov_badge_master]][codecov_link] | [![codecov][codecov_badge_development]][codecov_link] |
+
 ## Useful information
 
 - [Business Rules](docs/BusinessRules.md)
@@ -32,3 +37,10 @@ project's root.
 
 The _Continuous Integration_ triggers the _Continuous Deployment_. This means, if all tests passes and the changes are
 all good, the updates are applied to the production server.
+
+[codecov_badge_master]: https://codecov.io/gh/jourdanrodrigues/idiotransit_backend/branch/master/graph/badge.svg
+[codecov_badge_development]: https://codecov.io/gh/jourdanrodrigues/idiotransit_backend/branch/development/graph/badge.svg
+[codecov_link]: https://codecov.io/gh/jourdanrodrigues/idiotransit_backend
+[travis_badge_master]: https://travis-ci.org/jourdanrodrigues/idiotransit_backend.svg?branch=master
+[travis_badge_development]: https://travis-ci.org/jourdanrodrigues/idiotransit_backend.svg?branch=development
+[travis_link]: https://travis-ci.org/jourdanrodrigues/idiotransit_backend
