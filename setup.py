@@ -30,6 +30,7 @@ setup(
     install_requires=[
         'dj-database-url==0.4.2',
         'Django==1.11.4',
+        'psycopg2==2.7.3.1',
     ],
     extras_require={
         'test': ['coverage']
